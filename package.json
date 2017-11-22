@@ -1,19 +1,4 @@
 {
-  "name": "homebridge-konkePlatform",
-  "version": "0.0.1",
-  "description": "Sample Platform plugin for homebridge: https://github.com/nfarina/homebridge",
-  "license": "ISC",
-  "keywords": [
-    "homebridge-plugin",
-    "konkePlatform"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/example/homebridge.git"
-  },
-  "bugs": {
-    "url": "http://github.com/example/homebridge/issues"
-  },
   "engines": {
     "node": ">=0.12.0",
     "homebridge": ">=0.2.0"
@@ -22,5 +7,26 @@
     "ffi": "^2.2.0",
     "ref": "^1.3.5",
     "ref-struct": "^1.1.0"
-  }
+  },
+  "name": "homebridge-konkeplatform",
+  "description": "控客HomeBridge插件",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wfx6701961/Homebridge-konkePlatform.git"
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "author": "jianbao_hundun@163.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wfx6701961/Homebridge-konkePlatform/issues"
+  },
+  "homepage": "https://github.com/wfx6701961/Homebridge-konkePlatform#readme"
 }

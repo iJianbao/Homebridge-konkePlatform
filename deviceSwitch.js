@@ -75,10 +75,8 @@ var getDeviceInfoList = function () {
     console.log('json =====', deviceInfoList);
 
     var presentDevListAry = deviceInfoList['device_list'];
-    if (presentDevListAry.count > 0) {
-        addDevice(presentDevListAry[0]);
-    }
-    // dealWithDeviceList(presentDevListAry);
+    // addDevice(presentDevListAry[0]);
+    dealWithDeviceList(presentDevListAry);
 
 };
 
@@ -97,30 +95,55 @@ var searchDeviceInfo = function (devMac) {
 
 //找到不存在设备，删除
 var dealWithDeviceList = function (presentDevlist) {
-    var addAry = [];
-    for (var index in presentDevlist) {
-          var obj = presentDevlist[index];
-          if (deviceListAry.contains(obj) > 0) {
-              console.log('1111111');
-          }else {
-              console.log('2222222');
-              addAry.push(obj);
-              addDevice(obj);
-          }
+    var addAry = array_difference(presentDevlist, deviceListAry);
+    var deleteAry = array_difference(deviceListAry, presentDevlist);
+    console.log('新增设备=', addAry);
+    console.log('删除设备=', deleteAry);
+    for (var index in addAry) {
+        var obj = addAry[index];
+        addDevice(obj);
     }
-    var deleteAry = [];
-    for (index in deviceListAry) {
-          obj = deviceListAry[index];
-          if (presentDevlist.contains(obj) > 0) {
-              console.log('3333333');
-          }else {
-              console.log('4444444');
-              deleteAry.push(obj);
-              removeDevice(obj);
-          }
+    for (index in deleteAry) {
+        obj = deleteAry[index];
+        removeDevice(obj);
     }
     deviceListAry = presentDevlist;
 };
+
+//去数组之间的差
+function array_difference(a, b) { // 差集 a - b
+    //clone = a
+    var clone = a.slice(0);
+    for(var i = 0; i < b.length; i ++) {
+        var temp = b[i]['device_mac'];
+        for(var j = 0; j < clone.length; j ++) {
+            if(temp === clone[j]['device_mac']) {
+                //remove clone[j]
+                clone.splice(j,1);
+            }
+        }
+    }
+    return array_remove_repeat(clone);
+}
+
+//去除重复
+function array_remove_repeat(a) { // 去重
+    var r = [];
+    for(var i = 0; i < a.length; i ++) {
+        var flag = true;
+        var temp = a[i];
+        for(var j = 0; j < r.length; j ++) {
+            if(temp['device_mac'] === r[j]['device_mac']) {
+                flag = false;
+                break;
+            }
+        }
+        if(flag) {
+            r.push(temp);
+        }
+    }
+    return r;
+}
 
 //4：设置开关
 var setSwitch = function (devMac, value, callBack) {
