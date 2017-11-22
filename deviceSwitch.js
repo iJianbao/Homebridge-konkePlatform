@@ -75,7 +75,11 @@ var getDeviceInfoList = function () {
     console.log('json =====', deviceInfoList);
 
     var presentDevListAry = deviceInfoList['device_list'];
-    dealWithDeviceList(presentDevListAry);
+    if (presentDevListAry.count > 0) {
+        addDevice(presentDevListAry[0]);
+    }
+    // dealWithDeviceList(presentDevListAry);
+
 };
 
 //3：查找设备
@@ -128,9 +132,6 @@ var setSwitch = function (devMac, value, callBack) {
 };
 
 /*---------------homekit方法------------*/
-var uploadDevice = function () {
-    homeKit.KonkePlatform.prototype.uploadDevice();
-};
 var addDevice = function (devInfo) {
     homeKit.KonkePlatform.prototype.onDevice(devInfo);
 };
